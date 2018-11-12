@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 
+import { Session } from '../../models/session';
 import { Account } from '../../models/account';
 import { AccountService } from '../../services/account.service';
+import { SessionService } from '../../services/session.service';
 
 @Component({
     selector: 'app-login',
@@ -15,7 +17,7 @@ export class LoginComponent {
     private loginForm: FormGroup;
     private authenticated = false;
 
-    constructor(private fb: FormBuilder, private alertController: AlertController, private accountService: AccountService) {
+    constructor(private fb: FormBuilder, private alertController: AlertController, private accountService: AccountService, private sessionService: SessionService) {
         this.loginForm = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
@@ -35,8 +37,11 @@ export class LoginComponent {
     authenticate() {
         const username = this.loginForm.value.username;
         const password = this.loginForm.value.password;
+        const newSession = new Session(true, username, 'Malvern');
 
-        this.accountService.getAccount(username).subscribe((account: Account) => {
+        this.sessionService.sessionData = newSession;
+
+        /*this.accountService.getAccount(username).subscribe((account: Account) => {
             if (account) {
                 this.authenticated = (password === account.password);
                 sessionStorage.setItem("username", username);
@@ -46,6 +51,6 @@ export class LoginComponent {
             } else {
                 this.presentAlert();
             }
-        });
+        });*/
     }
 }

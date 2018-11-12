@@ -9,22 +9,22 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-card *ngIf="authenticated && !hideLogin">
-    <ion-card-header>
-        <ion-card-title>Log In</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-        <app-login></app-login>
-        <ion-buttons slot="end">
-            <ion-button (click)="hideLoginCard()">
-                <ion-icon slot="start" name="close"></ion-icon>
-                <ion-label>No Thanks</ion-label>
-            </ion-button>
-        </ion-buttons>
-    </ion-card-content>
-</ion-card>
-
-<ion-content>
+<ion-content padding>
+    <ion-card *ngIf="!authenticated && !hideLogin">
+        <ion-card-header>
+            <ion-card-title>Log In</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <app-login></app-login>
+            <ion-buttons slot="end">
+                <ion-button (click)="hideLoginCard()">
+                    <ion-icon slot="start" name="close"></ion-icon>
+                    <ion-label>No Thanks</ion-label>
+                </ion-button>
+            </ion-buttons>
+        </ion-card-content>
+    </ion-card>
+    <h1 *ngIf="authenticated">Welcome, {{session.currentUser}}!</h1>
     <app-events-list></app-events-list>
     <ion-fab *ngIf="authenticated" vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button (click)="openCreateEventForm()">
