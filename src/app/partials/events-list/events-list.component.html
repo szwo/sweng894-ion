@@ -1,6 +1,6 @@
 <ion-content>
-    <ng-container *ngIf="recommendedEvents.length > 0">
-        <h1>Recommended Events</h1>
+    <ng-container *ngIf="authenticated && recommendedEvents.length > 0">
+        <h2>Recommended Events</h2>
         <ion-list>
             <ion-card *ngFor="let event of recommendedEvents" (click)="navigate(event)" class="clickable">
                 <ion-card-header>
@@ -13,7 +13,7 @@
         </ion-list>
     </ng-container>
     <ng-container *ngIf="allEvents.length > 0">
-        <h1>All Events</h1>
+        <h2>All Events</h2>
         <ion-list>
             <ion-card *ngFor="let event of allEvents" (click)="navigate(event)" class="clickable">
                 <ion-card-header>

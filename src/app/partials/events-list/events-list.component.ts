@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from '../../models/event';
+import { SessionService } from '../../services/session.service';
+import { Session } from '../../models/session';
 
 @Component({
     selector: 'app-events-list',
@@ -8,15 +10,22 @@ import { Event } from '../../models/event';
 })
 export class EventsListComponent implements OnInit {
 
+    authenticated = false;
     public recommendedEvents: Array<Event> = [];
     public allEvents: Array<Event> = [];
 
-    constructor() { 
+    constructor(private sessionService: SessionService) { 
         this.populateSampleEvents(this.allEvents);
         this.populateSampleEvents(this.recommendedEvents);
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.sessionService.sessionObservable.subscribe((session: Session) => {
+            if (session) {
+                this.authenticated = session.authenticated;
+            }
+        });
+    }
 
     populateSampleEvents(eventsList: Array<Event>) {
         for (let i = 1; i < 6; i++) {
