@@ -15,11 +15,13 @@ import { AccountService } from '../services/account.service';
 import { RestService } from '../services/rest.service';
 import { EventService } from '../services/event.service';
 import { SessionService } from '../services/session.service';
+import { EventDetailsComponent } from '../partials/event-details/event-details.component';
 
 const PARTIALS = [
     EventsListComponent,
     LoginComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    EventDetailsComponent
 ];
 
 const SERVICES = [
@@ -30,7 +32,7 @@ const SERVICES = [
 ];
 
 @NgModule({
-    entryComponents: [CreateEventComponent],
+    entryComponents: [CreateEventComponent, EventDetailsComponent],
     imports: [
         FormsModule,
         ReactiveFormsModule,

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Event } from '../../models/event';
 import { SessionService } from '../../services/session.service';
 import { Session } from '../../models/session';
+import { ModalController } from '@ionic/angular';
+import { EventDetailsComponent } from '../event-details/event-details.component';
 
 @Component({
     selector: 'app-events-list',
@@ -14,7 +16,7 @@ export class EventsListComponent implements OnInit {
     public recommendedEvents: Array<Event> = [];
     public allEvents: Array<Event> = [];
 
-    constructor(private sessionService: SessionService) { 
+    constructor(private modalController: ModalController, private sessionService: SessionService) { 
         this.populateSampleEvents(this.allEvents);
         this.populateSampleEvents(this.recommendedEvents);
     }
@@ -25,6 +27,15 @@ export class EventsListComponent implements OnInit {
                 this.authenticated = session.authenticated;
             }
         });
+    }
+
+    async presentEventDetailsModal(event: Event) {
+        const modal = await this.modalController.create({
+            component: EventDetailsComponent,
+            componentProps: { event }
+        });
+
+        return await modal.present();
     }
 
     populateSampleEvents(eventsList: Array<Event>) {
@@ -48,7 +59,7 @@ export class EventsListComponent implements OnInit {
         }
     }
 
-    navigate(item) {
-        console.log(item);
+    navigate(event) {
+        this.presentEventDetailsModal(event);
     }
 }

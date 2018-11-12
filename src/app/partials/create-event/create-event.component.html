@@ -16,13 +16,12 @@
 
     <form (ngSubmit)="onSubmit()" [formGroup]="eventForm">
         <ion-item>
-            <ion-label>Event Description</ion-label>
             <ion-input type="text" formControlName="eventDescription" placeholder="Describe your event..."></ion-input>
         </ion-item>
     
         <ion-item>
             <ion-label>Start Date</ion-label>
-            <ion-datetime formControlName="startDate" display-format="MM/DD/YYYY"></ion-datetime>
+            <ion-datetime formControlName="startDate" display-format="MM/DD/YYYY" placeholder="MM/DD/YYYY"></ion-datetime>
         </ion-item>
 
         <ion-item>
@@ -32,7 +31,7 @@
 
         <ion-item>
             <ion-label>End Date</ion-label>
-            <ion-datetime formControlName="endDate" display-format="MM/DD/YYYY"></ion-datetime>
+            <ion-datetime formControlName="endDate" display-format="MM/DD/YYYY" placeholder="MM/DD/YYYY"></ion-datetime>
         </ion-item>
 
         <ion-item>

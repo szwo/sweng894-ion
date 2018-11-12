@@ -1,11 +1,9 @@
 <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
     <ion-item>
-        <ion-label>Username</ion-label>
-        <ion-input type="text" formControlName="username"></ion-input>
+        <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-label>Password</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
     </ion-item>
     <ion-button padding type="submit" size="medium" slot="end" [disabled]="!loginForm.valid">Submit</ion-button>
 </form>
