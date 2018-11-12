@@ -16,6 +16,7 @@ import { RestService } from '../services/rest.service';
 import { EventService } from '../services/event.service';
 import { SessionService } from '../services/session.service';
 import { EventDetailsComponent } from '../partials/event-details/event-details.component';
+import { EventsFilterPipe } from '../filters/eventsFilterPipe';
 
 const PARTIALS = [
     EventsListComponent,
@@ -47,6 +48,6 @@ const SERVICES = [
         ])
     ],
     providers: [SERVICES],
-    declarations: [HomePage, PARTIALS]
+    declarations: [HomePage, EventsFilterPipe, PARTIALS]
 })
 export class HomePageModule {}
