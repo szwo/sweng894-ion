@@ -1,5 +1,7 @@
 {
   "name": "food-truck",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

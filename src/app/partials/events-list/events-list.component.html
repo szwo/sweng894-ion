@@ -1,0 +1,28 @@
+<ion-content padding>
+    <ng-container *ngIf="recommendedEvents.length > 0">
+        <h1>Recommended Events</h1>
+        <ion-list>
+            <ion-card *ngFor="let event of recommendedEvents" (click)="navigate(event)" class="clickable">
+                <ion-card-header>
+                    <ion-card-title>{{event.saleDescription}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    <p>{{event.address}}</p>
+                </ion-card-content>
+            </ion-card>
+        </ion-list>
+    </ng-container>
+    <ng-container *ngIf="allEvents.length > 0">
+        <h1>All Events</h1>
+        <ion-list>
+            <ion-card *ngFor="let event of allEvents" (click)="navigate(event)" class="clickable">
+                <ion-card-header>
+                    <ion-card-title>{{event.saleDescription}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    <p>{{event.address}}</p>
+                </ion-card-content>
+            </ion-card>
+        </ion-list>
+    </ng-container>
+</ion-content>
