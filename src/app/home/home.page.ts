@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { CreateEventComponent } from '../partials/create-event/create-event.component';
 import { Session } from '../models/session';
 import { SessionService } from '../services/session.service';
+import { VendorProfileComponent } from '../partials/vendor-profile/vendor-profile.component';
 
 @Component({
     selector: 'app-home',
@@ -32,11 +33,29 @@ export class HomePage {
         return await modal.present();
     }
 
+    async presentVendorProfileModal() {
+        const modal = await this.modalController.create({
+            component: VendorProfileComponent
+        });
+
+        return await modal.present();
+    }
+
     hideLoginCard() {
         this.hideLogin = true;
     }
 
+    logout() {
+        this.authenticated = false;
+        this.hideLogin = false;
+        this.sessionService.reset();
+    }
+
     openCreateEventForm() {
         this.presentCreateEventModal();
+    }
+
+    openVendorProfile() {
+        this.presentVendorProfileModal();
     }
 }

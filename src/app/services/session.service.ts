@@ -9,6 +9,10 @@ export class SessionService {
 
     constructor() {}
 
+    reset() {
+        this._session.next(null);
+    }
+
     get sessionObservable(): Observable<any> {
         return this._session;
     }

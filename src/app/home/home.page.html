@@ -11,6 +11,8 @@
 
 <ion-content padding>
     <h1 *ngIf="authenticated">Welcome, {{session.currentUser}}!</h1>
+    <ion-button *ngIf="authenticated" size="small" shape="round" color="primary" fill="outline" (click)="openVendorProfile()">View Vendor Profile</ion-button>
+    <ion-button *ngIf="authenticated" size="small" shape="round" color="danger" fill="outline" (click)="logout()">Log Out</ion-button>
     <img id="logo" src="../../assets/logo.png" />
     <ion-card *ngIf="!authenticated && !hideLogin">
         <ion-card-header>

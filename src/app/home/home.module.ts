@@ -17,12 +17,14 @@ import { EventService } from '../services/event.service';
 import { SessionService } from '../services/session.service';
 import { EventDetailsComponent } from '../partials/event-details/event-details.component';
 import { EventsFilterPipe } from '../filters/eventsFilterPipe';
+import { VendorProfileComponent } from '../partials/vendor-profile/vendor-profile.component';
 
 const PARTIALS = [
     EventsListComponent,
     LoginComponent,
     CreateEventComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    VendorProfileComponent
 ];
 
 const SERVICES = [
@@ -33,7 +35,7 @@ const SERVICES = [
 ];
 
 @NgModule({
-    entryComponents: [CreateEventComponent, EventDetailsComponent],
+    entryComponents: [CreateEventComponent, EventDetailsComponent, VendorProfileComponent],
     imports: [
         FormsModule,
         ReactiveFormsModule,
