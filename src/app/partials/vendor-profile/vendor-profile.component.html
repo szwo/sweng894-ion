@@ -12,23 +12,23 @@
 </ion-header>
 
 <ion-content padding>
-    <form (ngSubmit)="onSubmit()" [formGroup]="vendorDetailsForm">
-        <h1>Vendor Information</h2>
+    <form (ngSubmit)="saveForm()" [formGroup]="vendorDetailsForm">
+        <h1>Vendor Information</h1>
         <ion-item>
-            <ion-input type="text" formControlName="name" value="name" placeholder="Vendor Name"></ion-input>
+            <ion-label>Vendor Name</ion-label>
+            <ion-input type="text" formControlName="name" value="name" maxlength="140"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input type="text" formControlName="foodType" value="foodType" placeholder="Category"
-                maxlength="140"></ion-input>
+            <ion-label>Category</ion-label>
+            <ion-input type="text" formControlName="foodType" value="foodType" maxlength="140"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input type="text" formControlName="description" value="description" placeholder="Vendor Description"
-                maxlength="140"></ion-input>
+            <ion-label>Description</ion-label>
+            <ion-input type="text" formControlName="description" value="description" placeholder="Vendor Description" maxlength="140"></ion-input>
         </ion-item>
         <ion-item>
             <div formArrayName="menu">
-                <ion-label>Items for Sale (optional)</ion-label>
-                <ion-button color="secondary" (click)="addItem()">Add Item</ion-button>
+                <ion-label>Items for Sale (optional) <ion-button slot="end" size="small" shape="round" color="secondary" (click)="addItem()">Add Item</ion-button></ion-label>
                 <ion-item *ngFor="let item of menuItems.controls; let i = index">
                     <ion-input type="text" [formControlName]="i" placeholder="New Item"></ion-input>
                     <ion-icon class="clickable" name="ios-close-circle-outline" (click)="removeItem(i)"></ion-icon>
@@ -36,7 +36,7 @@
             </div>
         </ion-item>
         <ion-item>
-            <ion-button padding type="submit" [disabled]="!vendorDetailsForm.valid"></ion-button>
+            <ion-button padding type="submit" color="success" [disabled]="!vendorDetailsForm.valid">Save</ion-button>
         </ion-item>
     </form>
 </ion-content>
