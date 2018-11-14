@@ -33,7 +33,6 @@ export class HomePage {
     }
 
     hideLoginCard() {
-        console.log(this.session);
         this.hideLogin = true;
     }
 
