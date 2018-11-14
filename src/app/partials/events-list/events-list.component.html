@@ -15,7 +15,7 @@
     <ng-container *ngIf="allEvents.length > 0">
         <h2>All Events</h2>
         <ion-toolbar>
-            <ion-searchbar [(ngModel)]="locationFilter"></ion-searchbar>
+            <ion-searchbar placeholder="Filter by location" [(ngModel)]="locationFilter"></ion-searchbar>
         </ion-toolbar>
         <ion-list>
             <ion-card *ngFor="let event of allEvents | eventsFilter : locationFilter" (click)="navigate(event)" class="clickable">

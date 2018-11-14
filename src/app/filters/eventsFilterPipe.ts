@@ -11,6 +11,6 @@ export class EventsFilterPipe implements PipeTransform {
             return events;
         }
 
-        return events.filter(event => event.address.includes(location));
+        return events.filter(event => event.address.toUpperCase().includes(location.toUpperCase()));
     }
 }
