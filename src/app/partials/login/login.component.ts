@@ -41,7 +41,7 @@ export class LoginComponent {
 
         this.sessionService.sessionData = newSession;
 
-        /*this.accountService.getAccount(username).subscribe((account: Account) => {
+        this.accountService.getAccount(username).subscribe((account: Account) => {
             if (account) {
                 this.authenticated = (password === account.password);
                 sessionStorage.setItem("username", username);
@@ -51,6 +51,6 @@ export class LoginComponent {
             } else {
                 this.presentAlert();
             }
-        });*/
+        });
     }
 }

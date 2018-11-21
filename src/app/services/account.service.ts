@@ -10,11 +10,12 @@ export class AccountService {
     private _accounts = {};
     private _authenticated = false;
     account : Account;
+    private url_base = 'http://localhost:8100/api';
 
     constructor(private restService: RestService) {}
 
     createAccount(payload : any): Observable<Account>{
-        return this.restService.post('/api/createAccount/', payload);
+        return this.restService.post(this.url_base + '/api/createAccount/', payload);
     }
 
     createVendor(payload : any): Observable<Vendor>{
@@ -22,7 +23,7 @@ export class AccountService {
     }
 
     getAccount(username: string) : Observable<Account>{
-        return this.restService.get('/api/getAccount/' + username);
+        return this.restService.get(this.url_base + '/api/getAccount/' + username);
     }
 
     getVendorDetails(username: string) : Observable<Vendor>{
