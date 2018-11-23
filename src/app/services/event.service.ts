@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class EventService {
 
-    events = [];
+    private _events = new BehaviorSubject<Event[]>(null);
 
     constructor(private restService: RestService) {
         // TODO: Perhaps initialize events
@@ -27,10 +27,8 @@ export class EventService {
 
         return new Promise((resolve,reject) => {
             this.postEvent(JSON.stringify(payload)).subscribe((response: any) => {
-                if (response) {
-                    this.events.push(event);
-                    resolve();
-                }
+                // this.events.push(event);
+                resolve();
             });
         });
     }
@@ -48,9 +46,10 @@ export class EventService {
             .pipe(catchError(this.handleError<any>('getReviews')));
     }
 
-    getEvents(): Observable<Event[]> {
-        return this.restService.get('/api/getEvents')
-            .pipe(catchError(this.handleError<any>('getEvents', [])));
+    getEvents() {
+        this.restService.get('/api/getEvents').pipe(catchError(this.handleError<any>('getEvents', []))).subscribe((value: any) => {
+            this._events.next(value);
+        });
     }
 
     postEvent(payload: any): Observable<Event> {
@@ -62,5 +61,9 @@ export class EventService {
             console.error(error);
             return of(result as T);
         }
+    }
+
+    get events(): Observable<Event[]> {
+        return this._events;
     }
 }

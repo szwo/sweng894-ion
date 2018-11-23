@@ -14,7 +14,7 @@
 <ion-content padding>
     <h2>Enter The Event Details</h2><br>
 
-    <form (ngSubmit)="onSubmit()" [formGroup]="eventForm">
+    <form (ngSubmit)="saveEvent()" [formGroup]="eventForm">
         <ion-item>
             <ion-input type="text" formControlName="eventDescription" placeholder="Describe your event..."></ion-input>
         </ion-item>

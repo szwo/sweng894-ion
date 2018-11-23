@@ -4,6 +4,7 @@ import { SessionService } from '../../services/session.service';
 import { Session } from '../../models/session';
 import { ModalController } from '@ionic/angular';
 import { EventDetailsComponent } from '../event-details/event-details.component';
+import { EventService } from '../../services/event.service';
 
 @Component({
     selector: 'app-events-list',
@@ -16,12 +17,11 @@ export class EventsListComponent implements OnInit {
     public recommendedEvents: Array<Event> = [];
     public allEvents: Array<Event> = [];
 
-    constructor(private modalController: ModalController, private sessionService: SessionService) { 
-        this.populateSampleEvents(this.allEvents);
-        this.populateSampleEvents(this.recommendedEvents);
-    }
+    constructor(private modalController: ModalController, private eventService: EventService, private sessionService: SessionService) {}
 
     ngOnInit() {
+        this.populateEvents();
+
         this.sessionService.sessionObservable.subscribe((session: Session) => {
             if (session) {
                 this.authenticated = session.authenticated;
@@ -36,6 +36,15 @@ export class EventsListComponent implements OnInit {
         });
 
         return await modal.present();
+    }
+
+    populateEvents() {
+        this.eventService.getEvents();
+        this.eventService.events.subscribe((events: Event[]) => {
+            if (events && events.length > 0) {
+                this.allEvents = events;
+            }
+        });
     }
 
     populateSampleEvents(eventsList: Array<Event>) {
