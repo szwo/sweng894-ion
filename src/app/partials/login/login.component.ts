@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 import { Session } from '../../models/session';
 import { Account } from '../../models/account';
@@ -15,9 +15,8 @@ import { SessionService } from '../../services/session.service';
 export class LoginComponent {
 
     private loginForm: FormGroup;
-    private authenticated = false;
 
-    constructor(private fb: FormBuilder, private alertController: AlertController, private accountService: AccountService, private sessionService: SessionService) {
+    constructor(private fb: FormBuilder, private toastController: ToastController, private alertController: AlertController, private accountService: AccountService, private sessionService: SessionService) {
         this.loginForm = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
@@ -34,23 +33,28 @@ export class LoginComponent {
         await alert.present();
     }
 
+    async presentToast() {
+        const toast = await this.toastController.create({
+            position: 'bottom',
+            color: 'success',
+            mode: 'ios',
+            message: 'Log in success!',
+            duration: 2000
+        });
+        toast.present();
+    }
+
     authenticate() {
         const username = this.loginForm.value.username;
         const password = this.loginForm.value.password;
-        const newSession = new Session(true, username, 'Malvern');
 
-        this.sessionService.sessionData = newSession;
-
-        /*this.accountService.getAccount(username).subscribe((account: Account) => {
-            if (account) {
-                this.authenticated = (password === account.password);
-                sessionStorage.setItem("username", username);
-                // TODO: this.loggedInUser = username;
-                // TODO: this.submitted = true;
-                // this.router.navigate(['/events']);
+        this.accountService.getAccount(username).subscribe((account: Account) => {
+            if (account && password === account.password) {
+                this.sessionService.sessionData = new Session(true, username, 'Malvern');
+                this.presentToast();
             } else {
                 this.presentAlert();
             }
-        });*/
+        });
     }
 }
