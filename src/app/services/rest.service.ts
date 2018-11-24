@@ -20,6 +20,11 @@ export class RestService {
 			.pipe(catchError(this.handleError<any>('post', [])));
 	}
 
+	delete(url: string) : Observable<any> {
+		return this.http.delete<any>(url)
+			.pipe(catchError(this.handleError<any>('delete', [])));
+	}
+	
 	get(url: string): Observable<any> {
 		return this.http.get<any>(url)
 			.pipe(catchError(this.handleError<any>('get', [])));

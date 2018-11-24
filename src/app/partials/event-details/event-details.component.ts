@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { NavParams, ModalController, ToastController } from '@ionic/angular';
 import { Event } from '../../models/event';
+import { EventService } from '../../services/event.service';
+import { Router } from '@angular/router';
+import { SessionService } from '../../services/session.service';
+import { Session } from '../../models/session';
 
 @Component({
     selector: 'app-event-details',
@@ -10,15 +14,39 @@ import { Event } from '../../models/event';
 export class EventDetailsComponent implements OnInit {
 
     selectedEvent: Event;
+    displayError = false;
+    canEdit = false;
 
-    constructor(private modalController: ModalController, private params: NavParams) {
+    constructor(private modalController: ModalController, private toastController: ToastController, private sessionService :SessionService, private router: Router, private params: NavParams, private eventService: EventService) {
         this.selectedEvent = params.data.event;
+        
     }
 
     ngOnInit() {
+        this.sessionService.sessionObservable.subscribe((session: Session) => {
+            if (session) {
+                this.canEdit = session.currentUser === this.selectedEvent.vendorUsername;
+            }
+        });
     }
 
     closeModal() {
         this.modalController.dismiss();
     }    
+
+    deleteEvent(){
+        this.eventService.deleteEvent(this.selectedEvent.id).subscribe((response) => {
+			const toast = this.toastController.create({
+                position: 'bottom',
+                color: 'success',
+                mode: 'ios',
+                message: 'Event Deleted!',
+                duration: 2000
+            });
+            this.eventService.getEvents();
+            this.modalController.dismiss();
+		},
+        error => this.displayError = true);
+        
+    }
 }

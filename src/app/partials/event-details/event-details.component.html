@@ -19,6 +19,10 @@
   <p><span class="bold">Location: </span>{{selectedEvent?.address}}</p>
   <p><span class="bold">Menu: </span>{{vendor?.menu}}</p>
 
+  <p *ngIf="canEdit">
+    <button type="button" class="btn btn-primary" [routerLink]="" (click)="goToCreateEvent()">Edit</button>
+    <button type="button" class="btn btn-danger" [routerLink]="" (click)="deleteEvent()">Delete</button>
+  </p>
   <!--<form (ngSubmit)="onSubmit()" [formGroup]="selectedEventForm">
 
         <ion-button padding type="reset" size="medium" ion-button color="light">Reset</ion-button>
