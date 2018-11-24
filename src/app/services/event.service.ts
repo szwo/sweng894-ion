@@ -36,6 +36,10 @@ export class EventService {
         return this.restService.post('/api/createReview/', payload);
     }
 
+    deleteEvent(id: number): Observable<Event>{
+        return this.restService.delete('/api/deleteEvent/' + id);
+    }
+
     getEvent(id: number): Observable<Event> {
         return this.restService.get("/api/getEvent/" + id)
             .pipe(catchError(this.handleError<any>('getEvent')));
