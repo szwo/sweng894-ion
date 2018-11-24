@@ -17,7 +17,12 @@ export class EventsListComponent implements OnInit {
     public recommendedEvents: Array<Event> = [];
     public allEvents: Array<Event> = [];
 
-    constructor(private modalController: ModalController, private eventService: EventService, private sessionService: SessionService) {}
+    constructor(
+        private modalController: ModalController,
+        private eventService: EventService,
+        private sessionService: SessionService) {
+            this.eventService.getEvents();
+        }
 
     ngOnInit() {
         this.populateEvents();
@@ -39,12 +44,18 @@ export class EventsListComponent implements OnInit {
     }
 
     populateEvents() {
-        this.eventService.getEvents();
         this.eventService.events.subscribe((events: Event[]) => {
             if (events && events.length > 0) {
                 this.allEvents = events;
+                this.topRecommendedEvents();
             }
         });
+    }
+
+    topRecommendedEvents() {
+        for (let i = 0; i < 3; i++) {
+            this.recommendedEvents.push(this.allEvents[i]);
+        }
     }
 
     populateSampleEvents(eventsList: Array<Event>) {

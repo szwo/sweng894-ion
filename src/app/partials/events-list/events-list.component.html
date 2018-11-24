@@ -2,9 +2,10 @@
     <ng-container *ngIf="authenticated && recommendedEvents.length > 0">
         <h2>Recommended Events</h2>
         <ion-list>
-            <ion-card *ngFor="let event of recommendedEvents" (click)="navigate(event)" class="clickable">
+            <ion-card *ngFor="let event of recommendedEvents" (click)="navigate(event)" class="clickable recommended" color="warning">
                 <ion-card-header>
-                    <ion-card-title>{{event.saleDescription}}</ion-card-title>
+                    <ion-card-subtitle class="recommended"><ion-icon name="md-star"></ion-icon> Recommended Event</ion-card-subtitle>
+                    <ion-card-title class="recommended">{{event.saleDescription}}</ion-card-title>
                 </ion-card-header>
                 <ion-card-content>
                     <p>{{event.address}}</p>
