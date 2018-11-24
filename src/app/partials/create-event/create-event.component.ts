@@ -44,9 +44,6 @@ export class CreateEventComponent implements OnInit {
     }
 
     async presentToast() {
-        this.eventService.createEvent(this.eventForm.value).then(() => {
-            // sessionStorage.clear();
-        });
         const toast = await this.toastController.create({
             position: 'bottom',
             color: 'success',
