@@ -1,31 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button color="danger" (click)="closeModal()">
-        <ion-icon name="close-circle"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>
-      {{ selectedEvent?.saleDescription }}
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button color="danger" (click)="closeModal()">
+                <ion-icon name="close-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ selectedEvent?.saleDescription }}
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Event Details</h2><br>
-  <p><span class="bold">Description: </span> {{selectedEvent?.saleDescription}}</p>
-  <p><span class="bold">Starts: </span> {{selectedEvent?.start | date : 'medium'}}</p>
-  <p><span class="bold">Ends: </span>{{selectedEvent?.end | date : 'medium'}}</p>
-  <p><span class="bold">Location: </span>{{selectedEvent?.address}}</p>
-  <p><span class="bold">Menu: </span>{{vendor?.menu}}</p>
+    <h2>Event Details</h2><br>
+    <p><span class="bold">Description: </span> {{selectedEvent?.saleDescription}}</p>
+    <p><span class="bold">Starts: </span> {{selectedEvent?.start | date : 'medium'}}</p>
+    <p><span class="bold">Ends: </span>{{selectedEvent?.end | date : 'medium'}}</p>
+    <p><span class="bold">Location: </span>{{selectedEvent?.address}}</p>
+    <p><span class="bold">Menu: </span>{{vendor?.menu}}</p>
 
-  <p *ngIf="canEdit">
-    <button type="button" class="btn btn-primary" [routerLink]="" (click)="goToCreateEvent()">Edit</button>
-    <button type="button" class="btn btn-danger" [routerLink]="" (click)="deleteEvent()">Delete</button>
-  </p>
-  <!--<form (ngSubmit)="onSubmit()" [formGroup]="selectedEventForm">
-
-        <ion-button padding type="reset" size="medium" ion-button color="light">Reset</ion-button>
-        <ion-button padding type="submit" size="medium">Create Event</ion-button>
-    </form>-->
+    <p *ngIf="canEdit">
+        <ion-button color="primary" (click)="goToCreateEvent()">Edit</ion-button>
+        <ion-button color="danger" (click)="deleteEvent()">Delete</ion-button>
+    </p>
 </ion-content>
