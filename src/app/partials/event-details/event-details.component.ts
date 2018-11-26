@@ -5,6 +5,7 @@ import { EventService } from '../../services/event.service';
 import { Router } from '@angular/router';
 import { SessionService } from '../../services/session.service';
 import { Session } from '../../models/session';
+import { CreateEventComponent } from '../create-event/create-event.component';
 
 @Component({
     selector: 'app-event-details',
@@ -48,5 +49,14 @@ export class EventDetailsComponent implements OnInit {
 		},
         error => this.displayError = true);
         
+    }
+
+    async presentEventDetailsModal(event: Event) {
+        const modal = await this.modalController.create({
+            component: CreateEventComponent,
+            componentProps: { event }
+        });
+
+        return await modal.present();
     }
 }

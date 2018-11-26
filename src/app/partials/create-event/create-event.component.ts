@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, NavParams } from '@ionic/angular';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { SessionService } from '../../services/session.service';
 import { Session } from '../../models/session';
@@ -16,13 +16,15 @@ export class CreateEventComponent implements OnInit {
     eventId: number;
     eventForm: FormGroup;
     session: Session;
+    selectedEvent : Event;
 
     constructor(
         private modalController: ModalController,
         private toastController: ToastController,
         private formBuilder: FormBuilder,
         private sessionService: SessionService,
-        private eventService: EventService
+        private eventService: EventService,
+        private params: NavParams,
     ) {}
 
     ngOnInit() {
@@ -31,7 +33,7 @@ export class CreateEventComponent implements OnInit {
                 this.session = session;
             }
         });
-
+        this.selectedEvent = this.params.data.event;
         this.eventForm = this.formBuilder.group({
             vendorUsername: new FormControl(),
             eventDescription: new FormControl(),
@@ -41,6 +43,18 @@ export class CreateEventComponent implements OnInit {
             endTime: new FormControl(),
             location: new FormControl(),
         });
+        if(this.selectedEvent){
+            this.eventId = this.selectedEvent.id;
+            this.eventForm.setValue({
+                "vendorUsername" : this.selectedEvent.vendorUsername,
+                "eventDescription" : this.selectedEvent.saleDescription,
+                "startDate": this.selectedEvent.start,
+                "startTime" : "",//new Date().getTime(),
+                "endDate" : this.selectedEvent.end,
+                "endTime" : "",//new Date().getTime(),
+                "location" : this.selectedEvent.address
+            });
+        } 
     }
 
     async presentToast() {
