@@ -20,7 +20,6 @@ export class EventDetailsComponent implements OnInit {
 
     constructor(private modalController: ModalController, private toastController: ToastController, private sessionService :SessionService, private router: Router, private params: NavParams, private eventService: EventService) {
         this.selectedEvent = params.data.event;
-        
     }
 
     ngOnInit() {
@@ -49,6 +48,11 @@ export class EventDetailsComponent implements OnInit {
 		},
         error => this.displayError = true);
         
+    }
+
+    editEvent(selectedEvent: Event) {
+        this.closeModal();
+        this.presentEventDetailsModal(selectedEvent);
     }
 
     async presentEventDetailsModal(event: Event) {

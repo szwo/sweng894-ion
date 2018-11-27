@@ -53,6 +53,7 @@ export class EventsListComponent implements OnInit {
     }
 
     topRecommendedEvents() {
+        this.recommendedEvents = [];
         for (let i = 0; i < 3; i++) {
             this.recommendedEvents.push(this.allEvents[i]);
         }
