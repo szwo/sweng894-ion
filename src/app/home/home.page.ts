@@ -46,7 +46,7 @@ export class HomePage {
     }
 
     logout() {
-        this.authenticated = false;
+        this.sessionService.sessionData = new Session(false, null, null);
         this.hideLogin = false;
         this.sessionService.reset();
     }
