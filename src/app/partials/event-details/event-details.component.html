@@ -23,4 +23,37 @@
         <ion-button color="primary" (click)="presentEventDetailsModal(selectedEvent)">Edit</ion-button>
         <ion-button color="danger" (click)="deleteEvent()">Delete</ion-button>
     </p>
+
+    <h2>Reviews</h2><br>
+    <ng-container *ngIf="session?.authenticated">
+        <h3>Submit a review</h3>
+        <ion-item>
+            <ionic3-star-rating 
+                activeIcon = "ios-star"
+                defaultIcon = "ios-star-outline"
+                activeColor = "#488aff" 
+                defaultColor = "#f4f4f4"
+                readonly="false"
+                [rating]="3">
+            </ionic3-star-rating>
+        </ion-item>
+        <form (ngSubmit)="submitReview()" [formGroup]="reviewForm">
+            <ion-item>
+                <ion-label>Comment</ion-label>
+                <ion-input type="text" formControlName="comment" placeholder="Leave a comment" autocorrect="off"></ion-input>
+            </ion-item>
+            <ion-button padding type="submit" size="medium">Submit</ion-button>
+        </form>
+    </ng-container>
+    <ion-list>
+        <ion-card *ngFor="let review of reviews" >
+            <ion-card-header>
+                <ion-card-title>{{review.rating}} Stars</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <p><span class="bold">Submitter: </span> {{review.loggedInUser}}</p>
+                <p><span class="bold">Comment: </span> {{review.comment}}</p>
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
 </ion-content>
