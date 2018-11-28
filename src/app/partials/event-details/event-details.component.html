@@ -20,7 +20,7 @@
     <p><span class="bold">Menu: </span>{{vendor?.menu}}</p>
 
     <p *ngIf="canEdit">
-        <ion-button color="primary" (click)="presentEventDetailsModal(selectedEvent)">Edit</ion-button>
+        <ion-button color="primary" (click)="editEvent(selectedEvent)">Edit</ion-button>
         <ion-button color="danger" (click)="deleteEvent()">Delete</ion-button>
     </p>
 

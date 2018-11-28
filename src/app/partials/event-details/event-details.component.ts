@@ -80,6 +80,10 @@ export class EventDetailsComponent implements OnInit {
         
     }
 
+    editEvent(selectedEvent: Event) {
+        this.closeModal();
+        this.presentEventDetailsModal(selectedEvent);
+    }
     submitReview(){
         this.reviewForm.patchValue({"rating": this.rating});
         this.eventService.createReview(JSON.stringify(this.reviewForm.value)).subscribe((review : Review) => {

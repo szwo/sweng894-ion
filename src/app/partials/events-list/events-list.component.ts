@@ -14,6 +14,7 @@ import { EventService } from '../../services/event.service';
 export class EventsListComponent implements OnInit {
 
     authenticated = false;
+    initialTop = true;
     public recommendedEvents: Array<Event> = [];
     public allEvents: Array<Event> = [];
 
@@ -47,12 +48,16 @@ export class EventsListComponent implements OnInit {
         this.eventService.events.subscribe((events: Event[]) => {
             if (events && events.length > 0) {
                 this.allEvents = events;
-                this.topRecommendedEvents();
+                if (this.initialTop) {
+                    this.topRecommendedEvents();
+                }
             }
         });
     }
 
     topRecommendedEvents() {
+        this.initialTop = false;
+        this.recommendedEvents = [];
         for (let i = 0; i < 3; i++) {
             this.recommendedEvents.push(this.allEvents[i]);
         }
