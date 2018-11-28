@@ -35,8 +35,13 @@ export class CreateEventComponent implements OnInit {
         });
         this.selectedEvent = this.params.data.event;
         this.eventForm = this.formBuilder.group({
-            comment: new FormControl(),
-            rating: new FormControl(),
+            vendorUsername: new FormControl(),
+            eventDescription: new FormControl(),
+            startDate: new FormControl(),
+            startTime: new FormControl(),
+            endDate: new FormControl(),
+            endTime: new FormControl(),
+            location: new FormControl(),
         });
         if(this.selectedEvent){
             this.eventId = this.selectedEvent.id;
