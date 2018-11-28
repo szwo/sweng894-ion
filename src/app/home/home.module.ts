@@ -12,7 +12,7 @@ import { EventsListComponent } from '../partials/events-list/events-list.compone
 import { LoginComponent } from '../partials/login/login.component';
 import { EventDetailsComponent } from '../partials/event-details/event-details.component';
 import { VendorProfileComponent } from '../partials/vendor-profile/vendor-profile.component';
-
+import { StarRatingModule } from 'ionic3-star-rating';
 import { AccountService } from '../services/account.service';
 import { RestService } from '../services/rest.service';
 import { EventService } from '../services/event.service';
@@ -42,6 +42,7 @@ const SERVICES = [
         HttpClientModule,
         CommonModule,
         IonicModule,
+        StarRatingModule,
         RouterModule.forChild([
             {
               path: '',
